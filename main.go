@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 
@@ -72,7 +72,7 @@ func main() {
 		reqContacts.Header.Set("Authorization", "Bearer "+user.AccessToken)
 		ans, _ := http.DefaultClient.Do(reqContacts)
 		defer ans.Body.Close()
-		body, err := io.ReadAll(ans.Body)
+		body, err := ioutil.ReadAll(ans.Body)
 		result := Result{}
 		json.Unmarshal(body, &result)
 		fmt.Println(string(body))
