@@ -53,8 +53,12 @@ type Result struct {
 }
 
 func main() {
+	url := os.Getenv("DOMAIN_URL")
+	if url == "" {
+		url = "http://localhost:3000"
+	}
 	goth.UseProviders(
-		google.New(os.Getenv("GOOGLE_CLIENT_ID"), os.Getenv("GOOGLE_CLIENT_SECRET"), "http://localhost:3000/auth/google/callback", "email", "profile", "https://www.googleapis.com/auth/contacts.readonly"),
+		google.New(os.Getenv("GOOGLE_CLIENT_ID"), os.Getenv("GOOGLE_CLIENT_SECRET"), os.Getenv("DOMAIN_URL")+"/auth/google/callback", "email", "profile", "https://www.googleapis.com/auth/contacts.readonly"),
 	)
 
 	p := pat.New()
