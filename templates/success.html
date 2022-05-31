@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Gontacts</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      padding-top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="text-success  text-center"><span class="fa fa-user"></span> Recent contacts</h1>
+      <div>
+        <div>
+          <div id="list">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const connections = [
+      {{ range $val:= .Connections }}
+      {{ $val }},
+    {{ end }}
+    ]
+
+    const groups = {}
+    connections.forEach(el => {
+      const source = el.metadata.sources.find(c => c.type === "CONTACT")
+      source.updateDate = source && new Date(source.updateTime)
+    })
+    connections.sort(function(a,b){
+      const updateDateA = a.metadata.sources.find(c => c.type === "CONTACT").updateDate
+      const updateDateB = b.metadata.sources.find(c => c.type === "CONTACT").updateDate
+      return updateDateB - updateDateA
+    });
+    connections
+    .filter(el => el.names)
+    .forEach(el => {
+      const source = el.metadata.sources.find(c => c.type === "CONTACT")
+      const g = groups[source.updateDate.toLocaleDateString()] || []
+      g.push(el)
+      groups[source.updateDate.toLocaleDateString()] = g
+    })
+
+    const $list = document.getElementById("list")
+    Object.entries(groups)
+    .forEach(([k, v]) => {
+      const html = `
+        <div>
+          <h3> ${k} </h3>
+          <ul class="list-group">
+            ${v.map(el => {
+      const source = el.metadata.sources.find(c => c.type === "CONTACT")
+      const pic = el.photos.find(p => p.default)
+      return `
+        <li class="list-group-item">
+          ${el.names[0].displayName}
+          <span>
+            Added at: ${source.updateDate.toLocaleTimeString()}
+          </span>
+        </li>
+      `
+            }).join("\n")}
+          </ul>
+
+        </div>
+      `
+      $list.innerHTML += html
+    })
+  </script>
+</body>
+
+</html>
