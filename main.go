@@ -98,10 +98,12 @@ func main() {
 		gothic.BeginAuthHandler(res, req)
 	})
 
+	p.PathPrefix("/static").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./public"))))
 	p.Get("/", func(res http.ResponseWriter, req *http.Request) {
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(res, false)
 	})
+
 	log.Println("listening on localhost:3000")
 	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), p))
 }

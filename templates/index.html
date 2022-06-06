@@ -4,17 +4,63 @@
 <head>
     <title>Contacts</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/static/favicon.ico">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        body        { padding-top:70px; }
+        html, body {
+            min-height: 100vh;
+        } 
+
+        body > div:first-child { 
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        body {
+            padding-top:70px;
+            display: flex;
+            flex-direction: column;
+        }
+        footer a {
+            margin: 0px 15px;
+        }
+        footer {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0px 40px 0;
+            border-top: 1px solid whitesmoke;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-<div>
     <div class="text-center">
-        <h1 class="display-3">Find your recently updated contacts</h1>
-        <button type="button" href="/auth/google" class="btn btn-primary btn-lg btn-danger"><span class="fa fa-google"></span> Google</button>
+        <h1 class="display-5">Find your recently updated contacts</h1>
+        <div>
+            <a type="button" href="/auth/google" class="btn btn-primary btn-lg btn-danger"><span class="fa fa-google"></span>&nbsp; Login with Google</a>
+        </div>
+        <br/>
+        <caption>
+            Finding your last updated contacts on google is really hard if you are not a tech person.
+        </caption>
+        <br/>
+        <small>
+
+            We don't save any of your information (there is no database actually), you can see the source code
+            <a href="https://www.github.com/luanraithz/gontacts" target="_blank" rel="noopener noreferrer">
+                here</a>,
+            and ensure it.
+        </small>
     </div>
-</div>
+    <footer>
+        <a href="https://www.github.com/luanraithz/gontacts" target="_blank" rel="noopener noreferrer">
+            Source code
+        </a>
+        <a href="https://www.luan.raithz.com" target="_blank" rel="noopener noreferrer">
+            Author's website
+        </a>
+    </footer>
 </body>
 </html> 
