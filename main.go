@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -71,7 +70,7 @@ func main() {
 			return
 		}
 		t, _ := template.ParseFiles("templates/success.html")
-		url := `https://people.googleapis.com/v1/people/me/connections?sortOrder=LAST_MODIFIED_DESCENDING&personFields=metadata&personFields=phoneNumbers&personFields=names&personFields=photos`
+		url := `https://people.googleapis.com/v1/people/me/connections?sortOrder=LAST_MODIFIED_DESCENDING&personFields=metadata&personFields=names`
 		reqContacts, _ := http.NewRequest("GET", url, nil)
 		reqContacts.Header.Set("Authorization", "Bearer "+user.AccessToken)
 		ans, _ := http.DefaultClient.Do(reqContacts)
@@ -79,7 +78,6 @@ func main() {
 		body, err := ioutil.ReadAll(ans.Body)
 		result := Result{}
 		json.Unmarshal(body, &result)
-		fmt.Println(string(body))
 
 		t.Execute(res, map[string]interface{}{
 			"Email":       user.Email,
