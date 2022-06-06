@@ -3,19 +3,48 @@
 <head>
   <title>Contacts</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/static/favicon.ico">
   <style>
-    body {
-      padding-top: 70px;
-    }
+        html, body {
+            min-height: 100vh;
+        } 
+
+        #list {
+          max-height: 65vh;
+          overflow: auto;
+        }
+
+        body > div:first-child { 
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: calc(100vh - 85px - 30px);
+        }
+        body {
+            padding-top:30px;
+            display: flex;
+            flex-direction: column;
+        }
+        footer a {
+            margin: 0px 15px;
+        }
+        footer {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0px 40px 0;
+            border-top: 1px solid whitesmoke;
+            margin-top: 20px;
+            height: 85px;
+        }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="jumbotron">
-      <h1 class="text-success  text-center"><span class="fa fa-user"></span> Recent changed contacts</h1>
+    <div>
+      <h1 class="text-success  text-center">Recent changed contacts</h1>
       <div>
         <div>
           <div id="list">
@@ -24,6 +53,14 @@
       </div>
     </div>
   </div>
+    <footer>
+        <a href="https://www.github.com/luanraithz/gontacts" target="_blank" rel="noopener noreferrer">
+            Source code
+        </a>
+        <a href="https://www.luan.raithz.com" target="_blank" rel="noopener noreferrer">
+            Author's website
+        </a>
+    </footer>
   <script>
     const connections = [
       {{ range $val:= .Connections }}
@@ -59,12 +96,11 @@
           <ul class="list-group">
             ${v.map(el => {
       const source = el.metadata.sources.find(c => c.type === "CONTACT")
-      const pic = el.photos.find(p => p.default)
       return `
         <li class="list-group-item">
           ${el.names[0].displayName}
           <span>
-            Added at: ${source.updateDate.toLocaleTimeString()}
+            updated/added at ${source.updateDate.toLocaleTimeString()}
           </span>
         </li>
       `

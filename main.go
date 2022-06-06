@@ -40,10 +40,8 @@ type Photo struct {
 	Url     string `json:"url"`
 }
 type Contact struct {
-	Metadata     ContactMetadata `json:"metadata"`
-	Names        []Name          `json:"names"`
-	PhoneNumbers []PhoneNumber   `json:"phoneNumbers"`
-	Photos       []Photo         `json:"photos"`
+	Metadata ContactMetadata `json:"metadata"`
+	Names    []Name          `json:"names"`
 }
 
 type Result struct {
