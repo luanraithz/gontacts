@@ -44,7 +44,7 @@
 <body>
   <div class="container">
     <div>
-      <h1 class="text-success  text-center">Recent changed contacts</h1>
+      <h1 class="text-success  text-center">Contacts</h1>
       <div>
         <div>
           <div id="list">
@@ -98,9 +98,9 @@
       const source = el.metadata.sources.find(c => c.type === "CONTACT")
       return `
         <li class="list-group-item">
-          ${el.names[0].displayName}
+          <b>${el.names[0].displayName}</b>
           <span>
-            updated/added at ${source.updateDate.toLocaleTimeString()}
+            updated/added at ${source.updateDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}
           </span>
         </li>
       `

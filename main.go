@@ -71,9 +71,19 @@ func main() {
 		url := `https://people.googleapis.com/v1/people/me/connections?sortOrder=LAST_MODIFIED_DESCENDING&personFields=metadata&personFields=names`
 		reqContacts, _ := http.NewRequest("GET", url, nil)
 		reqContacts.Header.Set("Authorization", "Bearer "+user.AccessToken)
-		ans, _ := http.DefaultClient.Do(reqContacts)
+		ans, err := http.DefaultClient.Do(reqContacts)
+		if err != nil {
+			http.Redirect(res, req, "/", http.StatusSeeOther)
+			println(err)
+			return
+		}
 		defer ans.Body.Close()
 		body, err := ioutil.ReadAll(ans.Body)
+		if err != nil {
+			http.Redirect(res, req, "/", http.StatusSeeOther)
+			println(err)
+			return
+		}
 		result := Result{}
 		json.Unmarshal(body, &result)
 
@@ -95,6 +105,10 @@ func main() {
 	})
 
 	p.PathPrefix("/static").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./public"))))
+	p.Get("/login", func(res http.ResponseWriter, req *http.Request) {
+		t, _ := template.ParseFiles("templates/login.html")
+		t.Execute(res, false)
+	})
 	p.Get("/", func(res http.ResponseWriter, req *http.Request) {
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(res, false)
