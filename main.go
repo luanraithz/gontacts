@@ -115,5 +115,9 @@ func main() {
 	})
 
 	log.Println("listening on localhost:3000")
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), p))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+	log.Fatal(http.ListenAndServe(":"+port, p))
 }

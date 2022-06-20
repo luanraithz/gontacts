@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <html>
+
 <head>
     <title>Contacts</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="/static/favicon.ico">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        html, body {
+        html,
+        body {
             min-height: 100vh;
-        } 
+        }
 
-        body > div:first-child { 
+        body>div:first-child {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
+
         body {
-            padding-top:70px;
+            padding-top: 70px;
             display: flex;
             flex-direction: column;
         }
+
         footer a {
             margin: 0px 15px;
         }
+
         footer {
             display: flex;
             justify-content: center;
@@ -34,15 +39,87 @@
             margin-top: 20px;
             height: 85px;
         }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        .g-sign-in-button {
+            margin: 10px auto;
+            display: inline-block;
+            width: 240px;
+            height: 50px;
+            background-color: #4285f4;
+            color: #fff;
+            border-radius: 1px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+            transition: background-color .218s, border-color .218s, box-shadow .218s;
+        }
+
+        .g-sign-in-button:hover {
+            cursor: pointer;
+            -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+            box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+        }
+
+        .g-sign-in-button:active {
+            background-color: #3367D6;
+            transition: background-color 0.2s;
+        }
+
+        .g-sign-in-button .content-wrapper {
+            height: 100%;
+            width: 100%;
+            border: 1px solid transparent;
+        }
+
+        .g-sign-in-button img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .g-sign-in-button .logo-wrapper {
+            padding: 8px;
+            background: #fff;
+            width: 48px;
+            height: 100%;
+            border-radius: 1px;
+            display: inline-block;
+        }
+
+        .g-sign-in-button .text-container {
+            font-family: Roboto, arial, sans-serif;
+            font-weight: 500;
+            letter-spacing: .21px;
+            font-size: 16px;
+            line-height: 48px;
+            vertical-align: top;
+            border: none;
+            display: inline-block;
+            text-align: center;
+            width: 180px;
+        }
     </style>
 </head>
+
 <body>
     <div class="text-center">
         <h1 class="display-5">Find your recently updated contacts</h1>
-        <div>
-            <a type="button" href="/auth/google" class="btn btn-primary btn-lg btn-danger"><span class="fa fa-google"></span>&nbsp; Login with Google</a>
-        </div>
-        <br/>
+        <a type="button" href="/auth/google">
+            <div class='g-sign-in-button'>
+                <div class=content-wrapper>
+                    <div class='logo-wrapper'>
+                        <img src='https://developers.google.com/identity/images/g-logo.png'>
+                    </div>
+                    <span class='text-container'>
+                        <span>Sign in with Google</span>
+                    </span>
+                </div>
+            </div>
+        </a>
+        <br />
     </div>
     <footer>
         <a href="https://www.github.com/luanraithz/gontacts" target="_blank" rel="noopener noreferrer">
@@ -53,4 +130,5 @@
         </a>
     </footer>
 </body>
-</html> 
+
+</html>
