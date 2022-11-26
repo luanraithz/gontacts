@@ -28,8 +28,9 @@ type Name struct {
 	DisplayName string `json:"displayName"`
 }
 
-type PhoneNumber struct {
-	Value string `json:"value"`
+type phoneNumber struct {
+	Metadata PhoneMetadata `json:"metadata"`
+	Value    string        `json:"value"`
 }
 type ContactMetadata struct {
 	Sources []Source `json:"sources"`
@@ -40,8 +41,9 @@ type Photo struct {
 	Url     string `json:"url"`
 }
 type Contact struct {
-	Metadata ContactMetadata `json:"metadata"`
-	Names    []Name          `json:"names"`
+	Metadata     ContactMetadata `json:"metadata"`
+	Names        []Name          `json:"names"`
+	PhoneNumbers []phoneNumber   `json:"phoneNumbers"`
 }
 
 type Result struct {
@@ -68,7 +70,7 @@ func main() {
 			return
 		}
 		t, _ := template.ParseFiles("templates/success.html")
-		url := `https://people.googleapis.com/v1/people/me/connections?sortOrder=LAST_MODIFIED_DESCENDING&personFields=metadata&personFields=names`
+		url := `https://people.googleapis.com/v1/people/me/connections?sortOrder=LAST_MODIFIED_DESCENDING&personFields=metadata&personFields=names&personFields=phoneNumbers`
 		reqContacts, _ := http.NewRequest("GET", url, nil)
 		reqContacts.Header.Set("Authorization", "Bearer "+user.AccessToken)
 		ans, err := http.DefaultClient.Do(reqContacts)

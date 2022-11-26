@@ -1,16 +1,18 @@
 ## Gontacts
 
-Find your last updated contacts on your google accout
-
+Find your last updated contacts on your google account
 
 ## Env vars
 
 ```
+// Google Authentication
 GOOGLE_CLIENT_SECRET=yourgoogleclientsecret
 GOOGLE_CLIENT_ID=yourgoogleclientid
-PORT=3000 <-- default Value
 DOMAIN_URL=http://localhost:3000 <-- defaultValue
+
 ```
+
+The app runs on the port `3000` by default, the port can be changed used the `PORT` environment variable.
 
 
 ## Scopes used:
