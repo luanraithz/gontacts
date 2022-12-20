@@ -111,6 +111,14 @@ func main() {
 		t, _ := template.ParseFiles("templates/login.html")
 		t.Execute(res, false)
 	})
+	p.Get("/privacy", func(res http.ResponseWriter, req *http.Request) {
+		t, _ := template.ParseFiles("templates/privacy.html")
+		t.Execute(res, false)
+	})
+	p.Get("/terms", func(res http.ResponseWriter, req *http.Request) {
+		t, _ := template.ParseFiles("templates/terms.html")
+		t.Execute(res, false)
+	})
 	p.Get("/", func(res http.ResponseWriter, req *http.Request) {
 		t, _ := template.ParseFiles("templates/index.html")
 		t.Execute(res, false)
